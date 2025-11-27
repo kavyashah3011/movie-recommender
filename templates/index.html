@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🎬 Movie Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <div class="logo">🎥 Movie Recommender</div>
+            <div class="subtitle">Find movies similar to your favourites</div>
+        </header>
+
+        <main class="main">
+            <section class="search-card">
+                <label for="movieInput" class="search-label">Search a movie</label>
+                <div class="search-row">
+                    <!-- Text box where you can type -->
+                    <input
+                        id="movieInput"
+                        list="moviesList"
+                        class="search-input"
+                        placeholder="Type a movie name…"
+                        autocomplete="off"
+                    >
+
+                    <!-- Suggestions list (browser will show dropdown while typing) -->
+                    <datalist id="moviesList">
+                        {% for title in movies %}
+                            <option value="{{ title }}"></option>
+                        {% endfor %}
+                    </datalist>
+
+                    <button id="recommendBtn" class="btn-primary">
+                        Recommend
+                    </button>
+                </div>
+                <p class="hint">
+                    Start typing and pick a title from suggestions, then click <b>Recommend</b>.
+                </p>
+                <div id="message" class="message"></div>
+            </section>
+
+            <section class="results-section">
+                <h2 class="section-title">Top 5 Recommendations</h2>
+                <div id="results" class="results-grid"></div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <span>Made with 💻 + 🍿</span>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
